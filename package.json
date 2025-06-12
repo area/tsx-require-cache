@@ -1,0 +1,15 @@
+{
+    "name": "tsx-version-test",
+    "version": "1.0.0",
+    "description": "Test different TSX versions",
+    "type": "commonjs",
+    "scripts": {
+        "test": "npx tsx test.ts"
+    },
+    "devDependencies": {
+        "@types/node": "^20.19.0"
+    },
+    "dependencies": {
+        "npx": "^10.2.2"
+    }
+}

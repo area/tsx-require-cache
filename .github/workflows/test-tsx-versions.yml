@@ -1,0 +1,36 @@
+name: Test TSX Versions
+
+on:
+    workflow_dispatch:
+    push:
+        branches: [main]
+
+jobs:
+    test-versions:
+        runs-on: ubuntu-latest
+        strategy:
+            matrix:
+                version: ["4.20.2", "4.19.4"] # Replace with the versions you want to compare
+        steps:
+            - uses: actions/checkout@v3
+
+            - name: Set up Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version: "20"
+
+            - name: Install pnpm
+              uses: pnpm/action-setup@v3
+              with:
+                  version: 8
+
+            - name: Install dependencies
+              run: pnpm install
+
+            - name: Install TSX
+              run: pnpm add tsx@${{ matrix.version }}
+
+            - name: Run test with TSX ${{ matrix.version }}
+              run: |
+                  echo "Testing with TSX version ${{ matrix.version }}"
+                  npx tsx test.ts
